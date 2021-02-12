@@ -1,0 +1,35 @@
+<%- include('header') -%>
+	<div class="undirskriftarform">
+		<h1 class="title">Undirskriftarlisti</h1>
+		<form method="post" action="/">
+			<div class="name">
+				<label for="name">Nafn</label>
+				<input type="text" name="name"/>
+			</div>
+			<div class="kennitala">
+				<label for="kennitala">Kennitala</label>
+				<input type="text" name="kennitala"/>
+			</div>
+			<div class="athugasemd">
+				<label for="athugasemd">Athugasemd</label>
+				<textarea type="text" name="athugasemd"></textarea>
+			</div>
+			<div>
+				<label for="birtanafn">Ekki birta nafn á lista</label>
+				<input type="checkbox" name="birtanafn" value="false"/>
+			</div>
+			<button>Skrifa undir</button>
+		</form>
+	</div><!-- undirskriftarform end -->
+	<hr>
+	<div class="undirskriftarlisti">
+		<h1 class="title">Undirskriftir</div>
+		<table>
+			<tr>
+				<th>Dags</th>
+				<th>Nafn</th>
+				<th>Athugasemd</th>
+			</tr>
+		</table>
+	</div>
+<%- include('footer') -%>

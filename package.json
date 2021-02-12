@@ -1,0 +1,36 @@
+{
+  "name": "vef2-2021-v2",
+  "version": "1.0.0",
+  "description": "[Kynning í fyrirlestri](https://www.youtube.com/watch?v=1kRJBE040oY).",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon app.js",
+    "sass": "node-sass --source-map-embed ./src/styles.scss ./public/styles.css",
+    "sass-watch": "node-sass --source-map-embed --watch --recursive src/styles.scss ./public/styles.css",
+    "dev": "concurrently npm:nodemon npm:sass npm:sass-watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osh16/vef2-2021-v2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osh16/vef2-2021-v2/issues"
+  },
+  "homepage": "https://github.com/osh16/vef2-2021-v2#readme",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "sass": "^1.32.7"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "eslint": "^7.19.0",
+    "node-sass": "^5.0.0",
+    "nodemon": "^2.0.7",
+    "stylelint": "^13.10.0"
+  }
+}
