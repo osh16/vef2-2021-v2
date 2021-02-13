@@ -24,7 +24,7 @@ const {
 	PORT : port = 3000,
 } = process.env;
 
-app.listen(port,host,() => {
+app.listen(port,() => {
 	console.log(
 	`server @ http://localhost:${port}`,
 	);
