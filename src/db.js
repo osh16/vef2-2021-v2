@@ -16,8 +16,14 @@ if (!connectionString) {
 }
 
 //ssl
+const ssl = nodeEnv !== 'development' ? { rejectUnauthorized: false } : false;
 
-const pool = new pg.Pool({ connectionString });
+const pool = new pg.Pool({ connectionString, ssl });
+
+pool.on('error', (err) => {
+	console.error("cringe",err);
+	process.exit(-1);
+});
 
 async function query(q, values = []) {
 	const client = await pool.connect();
