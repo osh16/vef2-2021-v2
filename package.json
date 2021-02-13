@@ -8,7 +8,8 @@
     "nodemon": "nodemon app.js",
     "sass": "node-sass --source-map-embed ./src/styles.scss ./public/styles.css",
     "sass-watch": "node-sass --source-map-embed --watch --recursive src/styles.scss ./public/styles.css",
-    "dev": "concurrently npm:nodemon npm:sass npm:sass-watch"
+    "dev": "concurrently npm:nodemon npm:sass npm:sass-watch",
+	"start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
+    "heroku": "^7.47.12",
     "pg": "^8.5.1",
     "sass": "^1.32.7",
     "xss": "^1.0.8"
