@@ -22,9 +22,10 @@ async function query(q, values = []) {
 		const result = await client.query(q,values);
 		return result.rows;
 	} catch (e) {
-		throw err;
+		throw(e);
 	} finally {
-		await client.end();
+		client.release();
+		//await client.end();
 	}
 }
 
@@ -33,13 +34,18 @@ async function insertSignature(data) {
 			   (name,nationalId,comment,anonymous)
 			   VALUES
 			   ($1,$2,$3,$4)`;
-	const values = [data.name, data.nationalId, data.comment, data.anonymous];
-	return await query(q,values);
+	var values = [];
+	if (data.anonymous === undefined) {
+		values = [data.name, data.nationalId, data.comment, false ];
+	} else {
+		values = [data.name, data.nationalId, data.comment, data.anonymous ];
+	}
+	return query(q,values);
 }
 
 async function getSignatures() { 
 	const q = 'SELECT * FROM signatures';
-	return await query(q);
+	return query(q);
 }
 
 module.exports = { insertSignature, getSignatures };

@@ -2,24 +2,32 @@
 	<div class="undirskriftarform">
 		<h1 class="title">Undirskriftarlisti</h1>
 		<form method="post" action="/">
-			<div class="name">
+			<div class="name form-group">
 				<label for="name">Nafn</label>
-				<input type="text" name="name"/>
+				<input class="form-control" type="text" name="name"/>
 			</div>
-			<div class="nationalId">
+			<div class="nationalId form-group">
 				<label for="nationalId">Kennitala</label>
-				<input type="text" name="nationalId"/>
+				<input class="form-control" type="text" name="nationalId"/>
 			</div>
-			<div class="comment">
+			<div class="comment form-group">
 				<label for="comment">Athugasemd</label>
-				<textarea type="text" name="comment"></textarea>
+				<textarea class="form-control" type="text" name="comment"></textarea>
 			</div>
-			<div>
+			<div class="form-group">
 				<label for="anonymous">Ekki birta nafn á lista</label>
-				<input type="checkbox" name="anonymous" value="false"/>
+				<input type="checkbox" name="anonymous" value="true"/>
 			</div>
-			<button>Skrifa undir</button>
+			<button class="btn btn-primary">Skrifa undir</button>
 		</form>
+		<% if (errors.length > 0) { %>
+		<div>
+			<p>Villur við undirskrift</p>
+			<% errors.forEach((err) => { %>
+			<ul><%= err.msg %></ul>
+			<% }); %>
+		</div>
+		<% } %>
 	</div><!-- undirskriftarform end -->
 	<hr>
 	<div class="undirskriftarlisti">
@@ -27,7 +35,7 @@
 		<% if (signatures.length === 0) { %>
 			<p>Engar undirskriftir</p>
 		<% } else { %>
-		<table>
+		<table class="table">
 			<tr>
 				<th>Dags</th>
 				<th>Nafn</th>
@@ -35,8 +43,8 @@
 			</tr>
 			<% signatures.forEach((sign) => { %>
 				<tr>
-					<td><%= sign.signed %></td>
-					<td><%= sign.name %></td>
+					<td><%= new Date(sign.signed).toLocaleString().split(',')[0] %></td>
+					<td><%= sign.anonymous ? "" : sign.name %></td>
 					<td><%= sign.comment %></td>
 				</tr>
 			<% }); %>

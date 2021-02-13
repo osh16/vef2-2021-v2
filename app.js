@@ -16,20 +16,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use('/', registration);
-/*app.get('/', (req,res) => {
-	res.render('index', {
-		title: "Undirskriftarlisti"
-	});
-});
-*/
-app.post('/', (req,res) => {
-	res.send(req.body);
-});
-
-/*app.post('/', urlencodedParser, (req,res) => {
-	res.send(req.body);
-});
-*/
 
 app.listen(port,host,() => {
 	console.log(
