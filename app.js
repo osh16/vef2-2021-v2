@@ -1,30 +1,35 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
+const bodyParser = require('body-parser');
+//const urlencodedParser = bodyParser.urlencoded({ extended: false})
+const registration = require("./src/registration")
 
 const host = '127.0.0.1';
 const port = 3000;
 
 const app = express();
 
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.get('/', (req,res) => {
-	console.log("hehe cvringe");
-	console.log(req.query.req1);
-	console.log(req.query.req2);
+app.use('/', registration);
+/*app.get('/', (req,res) => {
 	res.render('index', {
 		title: "Undirskriftarlisti"
 	});
 });
-
+*/
 app.post('/', (req,res) => {
-	res.send(`${req.body}`);
-	console.log("hehe");
+	res.send(req.body);
 });
+
+/*app.post('/', urlencodedParser, (req,res) => {
+	res.send(req.body);
+});
+*/
 
 app.listen(port,host,() => {
 	console.log(

@@ -6,17 +6,17 @@
 				<label for="name">Nafn</label>
 				<input type="text" name="name"/>
 			</div>
-			<div class="kennitala">
-				<label for="kennitala">Kennitala</label>
-				<input type="text" name="kennitala"/>
+			<div class="nationalId">
+				<label for="nationalId">Kennitala</label>
+				<input type="text" name="nationalId"/>
 			</div>
-			<div class="athugasemd">
-				<label for="athugasemd">Athugasemd</label>
-				<textarea type="text" name="athugasemd"></textarea>
+			<div class="comment">
+				<label for="comment">Athugasemd</label>
+				<textarea type="text" name="comment"></textarea>
 			</div>
 			<div>
-				<label for="birtanafn">Ekki birta nafn á lista</label>
-				<input type="checkbox" name="birtanafn" value="false"/>
+				<label for="anonymous">Ekki birta nafn á lista</label>
+				<input type="checkbox" name="anonymous" value="false"/>
 			</div>
 			<button>Skrifa undir</button>
 		</form>
@@ -24,12 +24,23 @@
 	<hr>
 	<div class="undirskriftarlisti">
 		<h1 class="title">Undirskriftir</div>
+		<% if (signatures.length === 0) { %>
+			<p>Engar undirskriftir</p>
+		<% } else { %>
 		<table>
 			<tr>
 				<th>Dags</th>
 				<th>Nafn</th>
 				<th>Athugasemd</th>
 			</tr>
+			<% signatures.forEach((sign) => { %>
+				<tr>
+					<td><%= sign.signed %></td>
+					<td><%= sign.name %></td>
+					<td><%= sign.comment %></td>
+				</tr>
+			<% }); %>
 		</table>
+		<% } %>
 	</div>
 <%- include('footer') -%>
