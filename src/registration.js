@@ -32,18 +32,23 @@ async (req,res,next) => {
         anonymous
     } = req.body;
 
-    const errors = validator.validationResult(req);
 
-    if (errors.isEmpty()) {
+    const errors = validator.validationResult(req);
+    console.log(errors);
+
+    if (errors.errors != []) {
+        console.log("errors registration.js");
+        console.log(errors);
         const result = await db.insertSignature(req.body);
     }
+    console.log("errors outside");
+    console.log(errors.errors);
     
     const signatures = await db.getSignatures();
-    console.log(errors);
     res.render('index', {
         title: "Undirskriftarlisti",
         signatures: signatures,
-        errors: errors
+        errors: errors.errors
     });
 });
 

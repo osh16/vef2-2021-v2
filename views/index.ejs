@@ -4,11 +4,11 @@
 		<form method="post" action="/">
 			<div class="name form-group">
 				<label for="name">Nafn</label>
-				<input class="form-control" type="text" name="name"/>
+				<input class="form-control " type="text" name="name"/>
 			</div>
 			<div class="nationalId form-group">
 				<label for="nationalId">Kennitala</label>
-				<input class="form-control" type="text" name="nationalId"/>
+				<input class="form-control <%= errors.param === 'nationalId' ? isInvalid : '' %>" type="text" name="nationalId"/>
 			</div>
 			<div class="comment form-group">
 				<label for="comment">Athugasemd</label>
@@ -18,16 +18,18 @@
 				<label for="anonymous">Ekki birta nafn á lista</label>
 				<input type="checkbox" name="anonymous" value="true"/>
 			</div>
+			<% if (errors.length > 0) { %>
+			<div>
+				<h3>Villur við undirskrift</h3>
+				<ul>
+					<% errors.forEach((err) => { %>
+					<li><%= err.msg %></li>
+					<% }); %>
+				</ul>
+			</div>
+			<% } %>
 			<button class="btn btn-primary">Skrifa undir</button>
 		</form>
-		<% if (errors.length > 0) { %>
-		<div>
-			<p>Villur við undirskrift</p>
-			<% errors.forEach((err) => { %>
-			<ul><%= err.msg %></ul>
-			<% }); %>
-		</div>
-		<% } %>
 	</div><!-- undirskriftarform end -->
 	<hr>
 	<div class="undirskriftarlisti">

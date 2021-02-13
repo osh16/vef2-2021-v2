@@ -14,17 +14,21 @@ if (!connectionString) {
   process.exit(1);
 }
 
-const pool = new pg.Pool({connectionString});
+const pool = new pg.Pool({ connectionString });
 
 async function query(q, values = []) {
 	const client = await pool.connect();
+	console.log("query");
 	try {
 		const result = await client.query(q,values);
+		console.log("try");
 		return result.rows;
 	} catch (e) {
-		throw(e);
+		console.log("catch");
+		return e;
+		//throw(e);
 	} finally {
-		client.release();
+		await client.release();
 		//await client.end();
 	}
 }
@@ -40,6 +44,8 @@ async function insertSignature(data) {
 	} else {
 		values = [data.name, data.nationalId, data.comment, data.anonymous ];
 	}
+	console.log("values:");
+	console.log(values);
 	return query(q,values);
 }
 
