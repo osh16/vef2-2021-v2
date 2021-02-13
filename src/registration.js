@@ -22,6 +22,7 @@ validator.body('name').trim().escape(),
 validator.body('name').isLength({min:1}).withMessage("Nafn má ekki vera tómt"),
 validator.body('nationalId').trim().escape().isLength({min:1}).withMessage("Kennitala má ekki vera tóm"),
 validator.body('nationalId').matches(new RegExp(nationalIdPattern)).withMessage("Kennitala verður að vera á formi 000000-0000 eða 0000000000"),
+validator.body('nationalId').blacklist('-'),
 validator.body('comment').trim().escape(),
 validator.body('comment').isLength({max:512}).withMessage("Athugasemdir geta ekki verið meira en 512 stafir"),
 async (req,res,next) => {
@@ -32,24 +33,26 @@ async (req,res,next) => {
         anonymous
     } = req.body;
 
+    req.body[0] = xss(req.body[0]);
+    req.body[1] = xss(req.body[1]);
+    req.body[2] = xss(req.body[2]);
 
     const errors = validator.validationResult(req);
-    console.log(errors);
 
-    if (errors.errors != []) {
-        console.log("errors registration.js");
-        console.log(errors);
+    if (errors.array().length == 0) {
         const result = await db.insertSignature(req.body);
     }
-    console.log("errors outside");
-    console.log(errors.errors);
     
     const signatures = await db.getSignatures();
     res.render('index', {
         title: "Undirskriftarlisti",
         signatures: signatures,
-        errors: errors.errors
+        errors: errors.array()
     });
+});
+
+router.get("/error", (req,res,next) => {
+    res.render('error');
 });
 
 module.exports = router;

@@ -34,6 +34,7 @@ async function query(q, values = []) {
 		return result.rows;
 	} catch (e) {
 		console.log("catch");
+		console.log(e);
 		return e;
 		//throw(e);
 	} finally {
